@@ -8,7 +8,7 @@ import { revalidatePath } from 'next/cache';
 export async function loginAction(prevState: any, formData: FormData) {
   const email = formData.get('email') as string;
   const password = formData.get('password') as string;
-  const redirectTo = (formData.get('redirect') as string) || '/dashboard/events';
+  const redirectTo = (formData.get('redirect') as string) || '/admin';
 
   const validated = loginSchema.safeParse({ email, password });
   if (!validated.success) {
