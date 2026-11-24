@@ -13,7 +13,11 @@ import {
   Copy,
   Edit,
   Sparkles,
-  ArrowUpRight
+  ArrowUpRight,
+  Music,
+  Share2,
+  SlidersHorizontal,
+  LayoutDashboard
 } from 'lucide-react';
 import { formatDateIndo } from '@/lib/utils/formatters';
 
@@ -37,7 +41,6 @@ export default async function AdminDashboardPage() {
     .eq('user_id', user.id)
     .single();
 
-  // If user has no invitation linked yet, fallback to sample slug
   const targetInvitation = invitation || (
     await supabase.from('invitations').select('*').eq('slug', 'sarah-brian').single()
   ).data;
@@ -63,28 +66,41 @@ export default async function AdminDashboardPage() {
   return (
     <div className="min-h-screen bg-[#FAF8F4] text-[#302D29] font-sans selection:bg-[#B69A72]/20 selection:text-[#846B48]">
       {/* Top Navbar */}
-      <header className="bg-white border-b border-[#EAE5DC] sticky top-0 z-30">
+      <header className="bg-white border-b border-[#EAE5DC] sticky top-0 z-30 shadow-sm backdrop-blur-md bg-white/95">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <Link href="/admin" className="font-serif text-2xl font-bold tracking-wider text-[#302D29]">
-              MAZÉLIA <span className="text-xs uppercase font-sans font-semibold tracking-widest text-[#B69A72] ml-1">Admin</span>
+            <Link href="/admin" className="flex items-center gap-2 group">
+              <span className="font-serif text-2xl font-bold tracking-wider text-[#302D29] group-hover:text-[#B69A72] transition-colors">
+                MAZÉLIA
+              </span>
+              <span className="px-2 py-0.5 rounded-full bg-[#B69A72]/15 text-[#846B48] border border-[#B69A72]/30 text-[10px] uppercase font-bold tracking-widest">
+                Admin
+              </span>
             </Link>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
             <Link
-              href={`/i/${targetInvitation?.slug || 'sarah-brian'}`}
+              href="/"
               target="_blank"
-              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg border border-[#B69A72]/40 bg-[#FAF8F4] text-xs font-semibold text-[#846B48] hover:bg-[#F2EDE4] transition-all"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl border border-[#B69A72]/30 bg-[#FAF8F4] text-xs font-semibold text-[#846B48] hover:bg-[#F2EDE4] transition-all shadow-sm"
             >
-              <span>Lihat Undangan Live</span>
+              <span>Lihat Undangan</span>
               <ExternalLink className="w-3.5 h-3.5" />
+            </Link>
+
+            <Link
+              href="/admin/edit"
+              className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#B69A72] hover:bg-[#A0845E] text-white text-xs font-semibold shadow-luxury-gold transition-all"
+            >
+              <Edit className="w-3.5 h-3.5" />
+              <span>Edit Undangan</span>
             </Link>
 
             <form action="/auth/signout" method="post">
               <button 
                 type="submit" 
-                className="text-xs text-[#9B9185] hover:text-[#302D29] font-medium px-3 py-1.5"
+                className="text-xs text-[#9B9185] hover:text-red-600 font-medium px-2.5 py-1.5 transition-colors"
               >
                 Keluar
               </button>
@@ -94,140 +110,157 @@ export default async function AdminDashboardPage() {
       </header>
 
       {/* Main Container */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
-        {/* Banner Info */}
-        <div className="bg-white rounded-2xl border border-[#EAE5DC] p-6 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div className="space-y-1">
-            <div className="flex items-center gap-2">
-              <span className="px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-semibold">
-                Undangan Aktif
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-6 sm:space-y-8">
+        {/* Banner Info / Overview */}
+        <div className="bg-gradient-to-r from-white via-white to-[#FAF8F4] rounded-2xl border border-[#EAE5DC] p-6 sm:p-8 shadow-sm flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+          <div className="space-y-2">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-semibold flex items-center gap-1">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                Undangan Online
               </span>
-              <span className="text-xs text-[#9B9185]">Slug: /{targetInvitation?.slug}</span>
+              <span className="text-xs text-[#9B9185] bg-[#FAF8F4] px-2.5 py-1 rounded-lg border border-[#EAE5DC]">
+                URL: /{targetInvitation?.slug}
+              </span>
             </div>
-            <h1 className="font-serif text-2xl sm:text-3xl font-bold text-[#302D29]">
+            <h1 className="font-serif text-2xl sm:text-4xl font-bold text-[#302D29]">
               {targetInvitation?.title || 'The Wedding of Sarah & Brian'}
             </h1>
-            <p className="text-xs text-[#6E675F]">
-              Tanggal Acara: {formatDateIndo(targetInvitation?.ceremony_date)} • {targetInvitation?.ceremony_location}
+            <p className="text-xs sm:text-sm text-[#6E675F] flex flex-wrap items-center gap-x-3 gap-y-1">
+              <span>📅 {formatDateIndo(targetInvitation?.ceremony_date)}</span>
+              <span>•</span>
+              <span>📍 {targetInvitation?.ceremony_location}</span>
             </p>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2.5 pt-2 lg:pt-0">
             <Link
               href="/admin/edit"
-              className="px-4 py-2 rounded-xl bg-white border border-[#EAE5DC] text-[#846B48] hover:bg-[#FAF8F4] text-xs font-semibold shadow-sm flex items-center gap-1.5 transition-all"
+              className="flex-1 sm:flex-initial px-5 py-2.5 rounded-xl bg-[#B69A72] hover:bg-[#A0845E] text-white text-xs sm:text-sm font-semibold shadow-luxury-gold flex items-center justify-center gap-2 transition-all hover:scale-105 active:scale-95"
             >
-              <Edit className="w-3.5 h-3.5" />
-              <span>Edit Data & Acara</span>
+              <Edit className="w-4 h-4" />
+              <span>Edit Nama & Acara</span>
             </Link>
+
             <Link
               href="/"
               target="_blank"
-              className="px-4 py-2 rounded-xl bg-[#B69A72] hover:bg-[#A0845E] text-white text-xs font-medium shadow-luxury-gold flex items-center gap-1.5 transition-all"
+              className="px-4 py-2.5 rounded-xl bg-white border border-[#EAE5DC] hover:bg-[#FAF8F4] text-[#846B48] text-xs sm:text-sm font-semibold flex items-center justify-center gap-1.5 transition-all shadow-sm"
             >
-              <span>Buka Halaman Utama</span>
-              <ArrowUpRight className="w-4 h-4" />
+              <Share2 className="w-4 h-4" />
+              <span>Buka Website</span>
             </Link>
           </div>
         </div>
 
-        {/* Metric Cards */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div className="bg-white p-5 rounded-2xl border border-[#EAE5DC] shadow-sm space-y-1">
+        {/* Metric Cards Grid */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
+          <div className="bg-white p-5 rounded-2xl border border-[#EAE5DC] shadow-sm space-y-2">
             <div className="flex items-center justify-between text-xs text-[#9B9185]">
-              <span>Tamu Konfirmasi Hadir</span>
-              <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+              <span className="font-medium">Konfirmasi Hadir</span>
+              <div className="w-8 h-8 rounded-lg bg-emerald-50 border border-emerald-200 flex items-center justify-center">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+              </div>
             </div>
-            <div className="font-serif text-2xl sm:text-3xl font-bold text-[#302D29]">
+            <div className="font-serif text-3xl font-bold text-[#302D29]">
               {attendingCount}
             </div>
-            <div className="text-[11px] text-emerald-600 font-medium">
-              Total {totalPax} Pax Hadir
+            <div className="text-[11px] text-emerald-600 font-semibold flex items-center gap-1">
+              <span>Total {totalPax} Pax Hadir</span>
             </div>
           </div>
 
-          <div className="bg-white p-5 rounded-2xl border border-[#EAE5DC] shadow-sm space-y-1">
+          <div className="bg-white p-5 rounded-2xl border border-[#EAE5DC] shadow-sm space-y-2">
             <div className="flex items-center justify-between text-xs text-[#9B9185]">
-              <span>Masih Ragu-ragu</span>
-              <Clock className="w-4 h-4 text-amber-500" />
+              <span className="font-medium">Masih Ragu</span>
+              <div className="w-8 h-8 rounded-lg bg-amber-50 border border-amber-200 flex items-center justify-center">
+                <Clock className="w-4 h-4 text-amber-500" />
+              </div>
             </div>
-            <div className="font-serif text-2xl sm:text-3xl font-bold text-[#302D29]">
+            <div className="font-serif text-3xl font-bold text-[#302D29]">
               {maybeCount}
             </div>
             <div className="text-[11px] text-amber-700 font-medium">
-              Perlu konfirmasi ulang
+              Menunggu kepastian
             </div>
           </div>
 
-          <div className="bg-white p-5 rounded-2xl border border-[#EAE5DC] shadow-sm space-y-1">
+          <div className="bg-white p-5 rounded-2xl border border-[#EAE5DC] shadow-sm space-y-2">
             <div className="flex items-center justify-between text-xs text-[#9B9185]">
-              <span>Berhalangan Hadir</span>
-              <XCircle className="w-4 h-4 text-gray-400" />
+              <span className="font-medium">Berhalangan</span>
+              <div className="w-8 h-8 rounded-lg bg-gray-50 border border-gray-200 flex items-center justify-center">
+                <XCircle className="w-4 h-4 text-gray-400" />
+              </div>
             </div>
-            <div className="font-serif text-2xl sm:text-3xl font-bold text-[#302D29]">
+            <div className="font-serif text-3xl font-bold text-[#302D29]">
               {declinedCount}
             </div>
             <div className="text-[11px] text-gray-500 font-medium">
-              Telah mengirim ucapan
+              Mengirim doa restu
             </div>
           </div>
 
-          <div className="bg-white p-5 rounded-2xl border border-[#EAE5DC] shadow-sm space-y-1">
+          <div className="bg-white p-5 rounded-2xl border border-[#EAE5DC] shadow-sm space-y-2">
             <div className="flex items-center justify-between text-xs text-[#9B9185]">
-              <span>Total Ucapan Doa</span>
-              <MessageSquareHeart className="w-4 h-4 text-[#B69A72]" />
+              <span className="font-medium">Total Ucapan</span>
+              <div className="w-8 h-8 rounded-lg bg-[#FAF8F4] border border-[#B69A72]/30 flex items-center justify-center">
+                <MessageSquareHeart className="w-4 h-4 text-[#B69A72]" />
+              </div>
             </div>
-            <div className="font-serif text-2xl sm:text-3xl font-bold text-[#302D29]">
+            <div className="font-serif text-3xl font-bold text-[#302D29]">
               {totalWishes}
             </div>
             <div className="text-[11px] text-[#846B48] font-medium">
-              Doa restu tersimpan
+              Tercatat di Buku Tamu
             </div>
           </div>
         </div>
 
-        {/* Content: RSVP & Wishes Table */}
-        <div className="bg-white rounded-2xl border border-[#EAE5DC] shadow-sm overflow-hidden space-y-4">
-          <div className="p-6 border-b border-[#EAE5DC] flex items-center justify-between">
+        {/* Content: Guestbook & Wishes Table */}
+        <div className="bg-white rounded-2xl border border-[#EAE5DC] shadow-sm overflow-hidden">
+          <div className="p-5 sm:p-6 border-b border-[#EAE5DC] flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <div>
-              <h2 className="font-serif text-xl font-bold text-[#302D29]">
+              <h2 className="font-serif text-xl sm:text-2xl font-bold text-[#302D29]">
                 Buku Tamu & Ucapan Doa Masuk
               </h2>
               <p className="text-xs text-[#9B9185] mt-0.5">
-                Semua ucapan dan konfirmasi kehadiran yang dikirimkan oleh para undangan melalui website.
+                Semua doa restu dan konfirmasi kehadiran yang dikirimkan oleh para tamu melalui website.
               </p>
             </div>
+            <span className="text-xs font-semibold text-[#846B48] bg-[#FAF8F4] px-3 py-1.5 rounded-lg border border-[#EAE5DC] self-start sm:self-auto">
+              Total {wishList.length} Ucapan
+            </span>
           </div>
 
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
               <thead className="bg-[#FAF8F4] text-[#6E675F] uppercase font-semibold border-b border-[#EAE5DC]">
                 <tr>
-                  <th className="py-3 px-6">Nama Pengirim</th>
-                  <th className="py-3 px-6">Hubungan</th>
-                  <th className="py-3 px-6">Kehadiran</th>
-                  <th className="py-3 px-6">Pax</th>
-                  <th className="py-3 px-6">Pesan Doa Restu</th>
-                  <th className="py-3 px-6">Waktu Kirim</th>
+                  <th className="py-3 px-4 sm:px-6">Nama Pengirim</th>
+                  <th className="py-3 px-4 sm:px-6">Hubungan</th>
+                  <th className="py-3 px-4 sm:px-6">Kehadiran</th>
+                  <th className="py-3 px-4 sm:px-6">Pax</th>
+                  <th className="py-3 px-4 sm:px-6">Pesan Doa Restu</th>
+                  <th className="py-3 px-4 sm:px-6">Waktu Kirim</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-[#EAE5DC]">
                 {wishList.length === 0 ? (
                   <tr>
-                    <td colSpan={6} className="py-8 text-center text-[#9B9185]">
+                    <td colSpan={6} className="py-12 text-center text-[#9B9185]">
                       Belum ada ucapan doa atau konfirmasi RSVP masuk.
                     </td>
                   </tr>
                 ) : (
                   wishList.map((w) => (
-                    <tr key={w.id} className="hover:bg-[#FAF8F4]/50 transition-colors">
-                      <td className="py-4 px-6 font-semibold text-[#302D29]">
+                    <tr key={w.id} className="hover:bg-[#FAF8F4]/60 transition-colors">
+                      <td className="py-4 px-4 sm:px-6 font-semibold text-[#302D29]">
                         {w.sender_name}
                       </td>
-                      <td className="py-4 px-6 text-[#6E675F]">
+                      <td className="py-4 px-4 sm:px-6 text-[#6E675F]">
                         {w.relationship || '-'}
                       </td>
-                      <td className="py-4 px-6">
+                      <td className="py-4 px-4 sm:px-6">
                         <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-semibold ${
                           w.attendance === 'attending'
                             ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
@@ -238,13 +271,13 @@ export default async function AdminDashboardPage() {
                           {w.attendance === 'attending' ? 'Hadir' : w.attendance === 'maybe' ? 'Ragu' : 'Tidak Hadir'}
                         </span>
                       </td>
-                      <td className="py-4 px-6 font-mono text-[#302D29]">
+                      <td className="py-4 px-4 sm:px-6 font-mono font-semibold text-[#302D29]">
                         {w.pax_count || 1}
                       </td>
-                      <td className="py-4 px-6 max-w-md text-[#4A4641] leading-relaxed">
+                      <td className="py-4 px-4 sm:px-6 max-w-sm sm:max-w-md text-[#4A4641] leading-relaxed whitespace-pre-wrap">
                         {w.message}
                       </td>
-                      <td className="py-4 px-6 text-[#9B9185] whitespace-nowrap">
+                      <td className="py-4 px-4 sm:px-6 text-[#9B9185] whitespace-nowrap">
                         {new Date(w.created_at).toLocaleDateString('id-ID', {
                           day: 'numeric',
                           month: 'short',
