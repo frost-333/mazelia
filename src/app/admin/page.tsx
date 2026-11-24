@@ -114,6 +114,13 @@ export default async function AdminDashboardPage() {
 
           <div className="flex items-center gap-2">
             <Link
+              href="/admin/edit"
+              className="px-4 py-2 rounded-xl bg-white border border-[#EAE5DC] text-[#846B48] hover:bg-[#FAF8F4] text-xs font-semibold shadow-sm flex items-center gap-1.5 transition-all"
+            >
+              <Edit className="w-3.5 h-3.5" />
+              <span>Edit Data & Acara</span>
+            </Link>
+            <Link
               href="/"
               target="_blank"
               className="px-4 py-2 rounded-xl bg-[#B69A72] hover:bg-[#A0845E] text-white text-xs font-medium shadow-luxury-gold flex items-center gap-1.5 transition-all"
