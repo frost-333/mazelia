@@ -11,7 +11,7 @@ import {
   ArrowUpRight
 } from 'lucide-react';
 import { DEFAULT_INVITATION } from '@/lib/constants/default-invitation';
-import { logoutAction } from '@/actions/auth-actions';
+import { LogoutButton } from '@/components/layout/LogoutButton';
 import { AgencyClientGrid } from '@/components/modules/admin/AgencyClientGrid';
 
 export const metadata = {
@@ -110,14 +110,7 @@ export default async function AdminDashboardPage() {
               <span>Tambah Klien</span>
             </Link>
 
-            <form action={logoutAction}>
-              <button 
-                type="submit" 
-                className="text-xs text-[#9B9185] hover:text-red-600 font-medium px-2.5 py-1.5 transition-colors"
-              >
-                Keluar
-              </button>
-            </form>
+            <LogoutButton />
           </div>
         </div>
       </header>

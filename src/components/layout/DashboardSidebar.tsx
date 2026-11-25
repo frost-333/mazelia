@@ -16,7 +16,7 @@ import {
   ArrowLeft,
 } from 'lucide-react';
 import { cn } from '@/lib/utils/formatters';
-import { logoutAction } from '@/actions/auth-actions';
+import { LogoutButton } from '@/components/layout/LogoutButton';
 import { Event } from '@/types';
 
 interface DashboardSidebarProps {
@@ -149,15 +149,7 @@ export function DashboardSidebar({ currentEvent, events = [], userEmail, userNam
               <p className="text-[10px] text-mazelia-taupe truncate">{userEmail || ''}</p>
             </div>
           </div>
-          <form action={logoutAction}>
-            <button
-              type="submit"
-              className="p-1.5 text-mazelia-taupe hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
-              title="Keluar"
-            >
-              <LogOut className="w-4 h-4" />
-            </button>
-          </form>
+          <LogoutButton variant="icon" />
         </div>
       </div>
     </aside>

@@ -18,7 +18,7 @@ import { DEFAULT_INVITATION } from '@/lib/constants/default-invitation';
 import { GuestLinkGenerator } from '@/components/modules/admin/GuestLinkGenerator';
 import { BulkGuestGenerator } from '@/components/modules/admin/BulkGuestGenerator';
 import { AdminGuestbookTable } from '@/components/modules/admin/AdminGuestbookTable';
-import { logoutAction } from '@/actions/auth-actions';
+import { LogoutButton } from '@/components/layout/LogoutButton';
 
 interface ClientDetailPageProps {
   params: Promise<{ id: string }>;
@@ -114,14 +114,7 @@ export default async function ClientDetailPage({ params }: ClientDetailPageProps
               <span>Edit Data</span>
             </Link>
 
-            <form action={logoutAction}>
-              <button 
-                type="submit" 
-                className="text-xs text-[#9B9185] hover:text-red-600 font-medium px-2.5 py-1.5 transition-colors"
-              >
-                Keluar
-              </button>
-            </form>
+            <LogoutButton />
           </div>
         </div>
       </header>
