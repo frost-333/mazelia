@@ -24,7 +24,7 @@ export default async function AdminDashboardPage() {
   const { data: { user } } = await supabase.auth.getUser();
 
   if (!user) {
-    redirect('/login?redirect=/admin');
+    redirect('/studio-mazelia/portal-masuk?redirect=/studio-mazelia/ruang-agensi');
   }
 
   // Fetch all invitations created by user
@@ -91,7 +91,7 @@ export default async function AdminDashboardPage() {
       <header className="bg-white border-b border-[#EAE5DC] sticky top-0 z-30 shadow-sm backdrop-blur-md bg-white/95">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <Link href="/admin" className="flex items-center gap-2 group">
+            <Link href="/studio-mazelia/ruang-agensi" className="flex items-center gap-2 group">
               <span className="font-serif text-2xl font-bold tracking-wider text-[#302D29] group-hover:text-[#B69A72] transition-colors">
                 MAZÉLIA
               </span>
@@ -103,7 +103,7 @@ export default async function AdminDashboardPage() {
 
           <div className="flex items-center gap-2 sm:gap-3">
             <Link
-              href="/admin/new"
+              href="/studio-mazelia/ruang-agensi/new"
               className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#B69A72] hover:bg-[#A0845E] text-white text-xs font-semibold shadow-luxury-gold transition-all active:scale-95"
             >
               <Plus className="w-4 h-4" />
@@ -142,7 +142,7 @@ export default async function AdminDashboardPage() {
           </div>
 
           <Link
-            href="/admin/new"
+            href="/studio-mazelia/ruang-agensi/new"
             className="self-start sm:self-auto inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#B69A72] hover:bg-[#A0845E] text-white text-xs sm:text-sm font-semibold shadow-luxury-gold transition-all"
           >
             <span>Buat Undangan Klien</span>

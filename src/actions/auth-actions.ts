@@ -8,7 +8,7 @@ import { revalidatePath } from 'next/cache';
 export async function loginAction(prevState: any, formData: FormData) {
   const email = formData.get('email') as string;
   const password = formData.get('password') as string;
-  const redirectTo = (formData.get('redirect') as string) || '/admin';
+  const redirectTo = (formData.get('redirect') as string) || '/studio-mazelia/ruang-agensi';
 
   const validated = loginSchema.safeParse({ email, password });
   if (!validated.success) {
@@ -80,7 +80,7 @@ export async function registerAction(prevState: any, formData: FormData) {
 export async function logoutAction() {
   const supabase = await createClient();
   await supabase.auth.signOut();
-  redirect('/login');
+  redirect('/studio-mazelia/portal-masuk');
 }
 
 export async function updateProfileAction(prevState: any, formData: FormData) {

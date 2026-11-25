@@ -17,7 +17,7 @@ export default async function EditClientPage({ params }: EditClientPageProps) {
   const { data: { user } } = await supabase.auth.getUser();
 
   if (!user) {
-    redirect(`/login?redirect=/admin/invitations/${id}/edit`);
+    redirect(`/studio-mazelia/portal-masuk?redirect=/studio-mazelia/ruang-agensi/invitations/${id}/edit`);
   }
 
   // Fetch invitation

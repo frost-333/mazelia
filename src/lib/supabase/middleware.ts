@@ -37,22 +37,40 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const isAuthPage = request.nextUrl.pathname.startsWith('/login') ||
-                     request.nextUrl.pathname.startsWith('/register') ||
-                     request.nextUrl.pathname.startsWith('/forgot-password');
+  const pathname = request.nextUrl.pathname;
 
-  const isDashboardPage = request.nextUrl.pathname.startsWith('/dashboard');
-
-  if (!user && isDashboardPage) {
+  // Block legacy predictable internal/auth paths with 404
+  if (
+    pathname === '/admin' ||
+    pathname.startsWith('/admin/') ||
+    pathname === '/login' ||
+    pathname.startsWith('/login/') ||
+    pathname === '/register' ||
+    pathname.startsWith('/register/')
+  ) {
     const url = request.nextUrl.clone();
-    url.pathname = '/login';
-    url.searchParams.set('redirect', request.nextUrl.pathname);
+    url.pathname = '/_not-found';
+    return NextResponse.rewrite(url, { status: 404 });
+  }
+
+  const isAuthPage =
+    pathname.startsWith('/studio-mazelia/portal-masuk') ||
+    pathname.startsWith('/forgot-password');
+
+  const isInternalProtected =
+    pathname.startsWith('/studio-mazelia/ruang-agensi') ||
+    pathname.startsWith('/dashboard');
+
+  if (!user && isInternalProtected) {
+    const url = request.nextUrl.clone();
+    url.pathname = '/studio-mazelia/portal-masuk';
+    url.searchParams.set('redirect', pathname);
     return NextResponse.redirect(url);
   }
 
   if (user && isAuthPage) {
     const url = request.nextUrl.clone();
-    url.pathname = '/admin';
+    url.pathname = '/studio-mazelia/ruang-agensi';
     return NextResponse.redirect(url);
   }
 

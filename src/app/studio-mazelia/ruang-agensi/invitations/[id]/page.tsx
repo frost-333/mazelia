@@ -37,7 +37,7 @@ export default async function ClientDetailPage({ params }: ClientDetailPageProps
   const { data: { user } } = await supabase.auth.getUser();
 
   if (!user) {
-    redirect(`/login?redirect=/admin/invitations/${id}`);
+    redirect(`/studio-mazelia/portal-masuk?redirect=/studio-mazelia/ruang-agensi/invitations/${id}`);
   }
 
   // Fetch this specific invitation
@@ -83,7 +83,7 @@ export default async function ClientDetailPage({ params }: ClientDetailPageProps
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Link
-              href="/admin"
+              href="/studio-mazelia/ruang-agensi"
               className="inline-flex items-center gap-1.5 text-xs text-[#846B48] hover:text-[#302D29] font-semibold mr-2 transition-colors"
             >
               <ArrowLeft className="w-4 h-4" />
@@ -107,7 +107,7 @@ export default async function ClientDetailPage({ params }: ClientDetailPageProps
             </a>
 
             <Link
-              href={`/admin/invitations/${targetInvitation.id}/edit`}
+              href={`/studio-mazelia/ruang-agensi/invitations/${targetInvitation.id}/edit`}
               className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#B69A72] hover:bg-[#A0845E] text-white text-xs font-semibold shadow-luxury-gold transition-all"
             >
               <Edit className="w-3.5 h-3.5" />
@@ -158,7 +158,7 @@ export default async function ClientDetailPage({ params }: ClientDetailPageProps
 
           <div className="flex flex-wrap items-center gap-2.5 pt-2 lg:pt-0">
             <Link
-              href={`/admin/invitations/${targetInvitation.id}/edit`}
+              href={`/studio-mazelia/ruang-agensi/invitations/${targetInvitation.id}/edit`}
               className="flex-1 sm:flex-initial px-5 py-2.5 rounded-xl bg-[#B69A72] hover:bg-[#A0845E] text-white text-xs sm:text-sm font-semibold shadow-luxury-gold flex items-center justify-center gap-2 transition-all hover:scale-105 active:scale-95"
             >
               <Edit className="w-4 h-4" />

@@ -35,7 +35,7 @@ export async function submitWishAction(prevState: any, formData: FormData) {
 
     revalidatePath(`/i/${slug}`);
     revalidatePath('/');
-    revalidatePath('/admin');
+    revalidatePath('/studio-mazelia/ruang-agensi');
     return { success: 'Terima kasih, ucapan dan konfirmasi kehadiran Anda telah tersimpan.' };
   } catch (err: any) {
     return { error: err?.message || 'Terjadi kesalahan sistem.' };
@@ -233,10 +233,10 @@ export async function updateInvitationAction(prevState: any, formData: FormData)
       revalidatePath(`/${slug}`);
       revalidatePath(`/i/${slug}`);
     }
-    revalidatePath('/admin');
-    revalidatePath(`/admin/invitations/${id}`);
-    revalidatePath(`/admin/invitations/${id}/edit`);
-    revalidatePath('/admin/edit');
+    revalidatePath('/studio-mazelia/ruang-agensi');
+    revalidatePath(`/studio-mazelia/ruang-agensi/invitations/${id}`);
+    revalidatePath(`/studio-mazelia/ruang-agensi/invitations/${id}/edit`);
+    revalidatePath('/studio-mazelia/ruang-agensi/edit');
     return { success: 'Data undangan dan acara berhasil diperbarui!' };
   } catch (err: any) {
     return { error: err?.message || 'Terjadi kesalahan sistem.' };
@@ -261,7 +261,7 @@ export async function deleteWishAction(wishId: string) {
       return { error: 'Gagal menghapus ucapan: ' + error.message };
     }
 
-    revalidatePath('/admin');
+    revalidatePath('/studio-mazelia/ruang-agensi');
     revalidatePath('/');
     return { success: 'Ucapan berhasil dihapus.' };
   } catch (err: any) {
@@ -352,7 +352,7 @@ export async function createInvitationAction(prevState: any, formData: FormData)
       return { error: 'Gagal membuat undangan: ' + error.message };
     }
 
-    revalidatePath('/admin');
+    revalidatePath('/studio-mazelia/ruang-agensi');
     revalidatePath(`/${slug}`);
     return { success: true, invitationId: created.id, slug: created.slug };
   } catch (err: any) {
@@ -383,7 +383,7 @@ export async function deleteInvitationAction(invitationId: string) {
       return { error: 'Gagal menghapus acara klien: ' + error.message };
     }
 
-    revalidatePath('/admin');
+    revalidatePath('/studio-mazelia/ruang-agensi');
     return { success: 'Acara klien berhasil dihapus.' };
   } catch (err: any) {
     return { error: err?.message || 'Terjadi kesalahan sistem.' };
@@ -460,7 +460,7 @@ export async function duplicateInvitationAction(invitationId: string) {
       return { error: 'Gagal menduplikasi undangan: ' + (error?.message || 'Data tidak tersimpan.') };
     }
 
-    revalidatePath('/admin');
+    revalidatePath('/studio-mazelia/ruang-agensi');
     return { success: true, newInvitationId: created.id, newSlug: created.slug };
   } catch (err: any) {
     return { error: err?.message || 'Terjadi kesalahan sistem.' };

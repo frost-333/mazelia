@@ -6,6 +6,7 @@ import type { Metadata } from 'next';
 
 const RESERVED_SLUGS = [
   'admin',
+  'studio-mazelia',
   'dashboard',
   'login',
   'register',

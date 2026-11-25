@@ -40,7 +40,7 @@ export function CreateInvitationForm() {
   // If creation succeeds, redirect to client detail
   React.useEffect(() => {
     if (state?.success && state?.invitationId) {
-      router.push(`/admin/invitations/${state.invitationId}`);
+      router.push(`/studio-mazelia/ruang-agensi/invitations/${state.invitationId}`);
     }
   }, [state, router]);
 
@@ -50,7 +50,7 @@ export function CreateInvitationForm() {
       <div className="flex items-center justify-between pb-4 border-b border-[#EAE5DC]">
         <div>
           <Link
-            href="/admin"
+            href="/studio-mazelia/ruang-agensi"
             className="inline-flex items-center gap-1.5 text-xs text-[#846B48] hover:text-[#302D29] font-medium mb-2 transition-colors"
           >
             <ArrowLeft className="w-3.5 h-3.5" /> Kembali ke Katalog Klien
@@ -278,7 +278,7 @@ export function CreateInvitationForm() {
 
         {/* Submit Actions */}
         <div className="flex justify-end gap-3 pt-2">
-          <Link href="/admin">
+          <Link href="/studio-mazelia/ruang-agensi">
             <Button variant="outline" size="md">
               Batal
             </Button>

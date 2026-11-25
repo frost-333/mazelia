@@ -109,7 +109,7 @@ export function EditInvitationForm({ invitation }: EditInvitationFormProps) {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-[#EAE5DC] gap-4">
         <div>
           <Link
-            href="/admin"
+            href="/studio-mazelia/ruang-agensi"
             className="inline-flex items-center gap-1.5 text-xs text-[#846B48] hover:text-[#302D29] font-medium mb-2 transition-colors"
           >
             <ArrowLeft className="w-3.5 h-3.5" /> Kembali ke Katalog Klien
@@ -953,7 +953,7 @@ export function EditInvitationForm({ invitation }: EditInvitationFormProps) {
 
         {/* Save Button */}
         <div className="flex justify-end gap-3 sticky bottom-4 z-20 bg-white/90 backdrop-blur p-4 rounded-2xl border border-[#EAE5DC] shadow-luxury">
-          <Link href="/admin">
+          <Link href="/studio-mazelia/ruang-agensi">
             <Button variant="outline" size="md">
               Batal
             </Button>
