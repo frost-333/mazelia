@@ -102,14 +102,6 @@ export default async function AdminDashboardPage() {
           </div>
 
           <div className="flex items-center gap-2 sm:gap-3">
-            <Link
-              href="/studio-mazelia/ruang-agensi/new"
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#B69A72] hover:bg-[#A0845E] text-white text-xs font-semibold shadow-luxury-gold transition-all active:scale-95"
-            >
-              <Plus className="w-4 h-4" />
-              <span>Tambah Klien</span>
-            </Link>
-
             <LogoutButton />
           </div>
         </div>
