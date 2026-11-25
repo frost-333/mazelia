@@ -112,7 +112,7 @@ export function HomeOrderFeaturesPricing() {
     },
     {
       q: 'Apakah saya harus memiliki akun untuk memesan?',
-      a: 'Anda dapat menjelajahi tema dan melihat contoh undangan tanpa login. Untuk mengelola data acara secara mandiri di dashboard, Anda dapat membuat akun gratis atau dibantu langsung oleh tim kami.',
+      a: 'Tidak perlu. Anda dapat menjelajahi tema, melihat contoh undangan, dan langsung memesan melalui tim MAZÉLIA tanpa harus membuat akun.',
     },
   ];
 
@@ -233,49 +233,9 @@ export function HomeOrderFeaturesPricing() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
-            {/* Tier 1: Official Free Beta Planner */}
-            <div className="rounded-3xl border border-[#E8DFD0] bg-white p-7 shadow-sm flex flex-col justify-between space-y-6">
-              <div className="space-y-4">
-                <span className="inline-block px-2.5 py-0.5 rounded-full bg-[#FAF8F4] border border-[#E8DFD0] text-[10px] font-bold uppercase tracking-wider text-[#846B48]">
-                  Akses Beta Terbuka
-                </span>
-                <div>
-                  <h3 className="font-serif text-2xl font-bold text-[#302D29]">
-                    MAZÉLIA Planner (Beta)
-                  </h3>
-                  <p className="text-xs text-[#6E675F] mt-1">
-                    Kelola perencanaan acara secara mandiri selama masa beta.
-                  </p>
-                </div>
-                <div className="flex items-baseline gap-1 pt-1">
-                  <span className="font-serif text-3xl font-bold text-[#302D29]">Gratis</span>
-                  <span className="text-xs text-[#9B9185]">/ selama masa beta</span>
-                </div>
-                <ul className="space-y-2.5 pt-4 border-t border-[#E8DFD0]/70 text-xs text-[#554F47]">
-                  {[
-                    'Buat & kelola daftar acara',
-                    'Checklist & Budget Planner (IDR)',
-                    'Guest Management & kuota pax',
-                    'Generator pesan undangan WhatsApp',
-                  ].map((f) => (
-                    <li key={f} className="flex items-start gap-2">
-                      <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                      <span>{f}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <Link
-                href="/register"
-                className="w-full py-3 rounded-xl border border-[#E8DFD0] bg-[#FAF8F4] hover:bg-[#F2ECE2] text-center text-xs font-semibold text-[#302D29] transition-colors"
-              >
-                Daftar Gratis
-              </Link>
-            </div>
-
-            {/* Tier 2: Recommended Agency / Undangan Digital Service */}
-            <div className="rounded-3xl border-2 border-[#B69A72] bg-white p-7 shadow-luxury relative flex flex-col justify-between space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-7 max-w-4xl mx-auto items-stretch">
+            {/* Tier 1: Recommended Agency / Undangan Digital Service */}
+            <div className="rounded-3xl border-2 border-[#B69A72] bg-white p-7 sm:p-8 shadow-luxury relative flex flex-col justify-between space-y-6">
               <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#B69A72] text-white text-[10px] font-bold px-3.5 py-1 rounded-full uppercase tracking-wider shadow-sm">
                 Rekomendasi Layanan
               </div>
@@ -317,8 +277,8 @@ export function HomeOrderFeaturesPricing() {
               </Link>
             </div>
 
-            {/* Tier 3: Official Upcoming Event Pass from pricing/page.tsx */}
-            <div className="rounded-3xl border border-[#E8DFD0] bg-white/80 p-7 shadow-sm flex flex-col justify-between space-y-6">
+            {/* Tier 2: Official Upcoming Event Pass from pricing/page.tsx */}
+            <div className="rounded-3xl border border-[#E8DFD0] bg-white/80 p-7 sm:p-8 shadow-sm flex flex-col justify-between space-y-6">
               <div className="space-y-4">
                 <span className="inline-block px-2.5 py-0.5 rounded-full bg-amber-50 border border-amber-200 text-[10px] font-bold uppercase tracking-wider text-amber-800">
                   Segera Hadir (Fase 2)
@@ -337,10 +297,10 @@ export function HomeOrderFeaturesPricing() {
                 </div>
                 <ul className="space-y-2.5 pt-4 border-t border-[#E8DFD0]/70 text-xs text-[#554F47]">
                   {[
-                    'Semua fitur MAZÉLIA Planner',
                     '1 Website Undangan Digital Mewah',
                     'Buku ucapan online & amplop digital',
                     'Ekspor rekapitulasi anggaran & rundown PDF',
+                    'Dukungan prioritas tim MAZÉLIA',
                   ].map((f) => (
                     <li key={f} className="flex items-start gap-2">
                       <Check className="w-4 h-4 text-[#B69A72] shrink-0 mt-0.5" />
@@ -350,10 +310,10 @@ export function HomeOrderFeaturesPricing() {
                 </ul>
               </div>
               <Link
-                href="/pricing"
+                href="/kontak"
                 className="w-full py-3 rounded-xl border border-[#E8DFD0] bg-white hover:bg-[#FAF8F4] text-center text-xs font-semibold text-[#846B48] transition-colors"
               >
-                Lihat Detail Paket
+                Tanya Ketersediaan Paket
               </Link>
             </div>
           </div>

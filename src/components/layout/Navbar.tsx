@@ -66,18 +66,13 @@ export function Navbar() {
           ))}
         </nav>
 
-        {/* Desktop Auth & Order CTAs */}
+        {/* Desktop Order CTA */}
         <div className="hidden lg:flex items-center space-x-3">
-          <Link href="/login">
-            <Button variant="ghost" size="sm" className="text-[#554F47] hover:text-[#302D29]">
-              Login
-            </Button>
-          </Link>
           <Link href="/kontak">
             <Button
               variant="primary"
               size="sm"
-              className="bg-[#B69A72] hover:bg-[#846B48] text-white shadow-[0_8px_20px_-6px_rgba(182,154,114,0.5)] px-4"
+              className="bg-[#B69A72] hover:bg-[#846B48] text-white shadow-[0_8px_20px_-6px_rgba(182,154,114,0.5)] px-5"
             >
               <Sparkles className="w-3.5 h-3.5" />
               <span>Pesan Undangan</span>
@@ -124,11 +119,6 @@ export function Navbar() {
             ))}
           </div>
           <div className="pt-3 border-t border-[#E8DFD0] flex flex-col space-y-2">
-            <Link href="/login" onClick={() => setIsOpen(false)}>
-              <Button variant="outline" className="w-full justify-center border-[#E8DFD0] bg-white text-[#302D29]">
-                Login Akun
-              </Button>
-            </Link>
             <Link href="/kontak" onClick={() => setIsOpen(false)}>
               <Button variant="primary" className="w-full justify-center bg-[#B69A72] hover:bg-[#846B48] text-white">
                 Pesan Undangan Sekarang

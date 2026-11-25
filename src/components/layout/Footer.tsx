@@ -99,11 +99,6 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/login" className="hover:text-[#B69A72] transition-colors">
-                  Masuk Akun Pengguna
-                </Link>
-              </li>
-              <li>
                 <span className="text-[#9B9185]">Privacy Policy (UU PDP No. 27/2022)</span>
               </li>
               <li>
