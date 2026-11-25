@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
 import { EditInvitationForm } from '@/components/modules/admin/EditInvitationForm';
+import { DEFAULT_INVITATION } from '@/lib/constants/default-invitation';
 
 export const metadata = {
   title: 'Edit Data Undangan — MAZÉLIA Admin',
@@ -14,20 +15,16 @@ export default async function AdminEditPage() {
     redirect('/login?redirect=/admin/edit');
   }
 
-  // Fetch invitation
+  // Fetch latest invitation
   const { data: invitation } = await supabase
     .from('invitations')
     .select('*')
     .eq('user_id', user.id)
-    .single();
+    .order('created_at', { ascending: false })
+    .limit(1)
+    .maybeSingle();
 
-  const targetInvitation = invitation || (
-    await supabase.from('invitations').select('*').eq('slug', 'sarah-brian').single()
-  ).data;
-
-  if (!targetInvitation) {
-    redirect('/admin');
-  }
+  const targetInvitation = invitation || DEFAULT_INVITATION;
 
   return (
     <div className="min-h-screen bg-[#FAF8F4]">

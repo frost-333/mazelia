@@ -5,6 +5,11 @@ export const metadata: Metadata = {
   title: 'MAZÉLIA — Events • Moments • Memories',
   description: 'Platform perencanaan acara digital elegan untuk individu dan keluarga di Indonesia. Checklist, anggaran, tamu, dan vendor dalam satu tempat.',
   keywords: ['event planner', 'wedding planner', 'undangan digital', 'budget planner', 'acara indonesia'],
+  icons: {
+    icon: '/icon.svg',
+    shortcut: '/icon.svg',
+    apple: '/icon.svg',
+  },
   openGraph: {
     title: 'MAZÉLIA — Events • Moments • Memories',
     description: 'Platform perencanaan acara digital elegan untuk individu dan keluarga di Indonesia.',
