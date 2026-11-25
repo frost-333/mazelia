@@ -1,64 +1,123 @@
 import Link from 'next/link';
+import { WEDDING_THEMES } from '@/lib/constants/themes';
 
 export function Footer() {
+  const themes = Object.values(WEDDING_THEMES);
+
   return (
-    <footer className="border-t border-mazelia-border bg-white text-mazelia-charcoal pt-16 pb-12 mt-auto">
+    <footer className="border-t border-[#E8DFD0] bg-white text-[#302D29] pt-16 pb-12 mt-auto">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Brand Info */}
-          <div className="md:col-span-1 space-y-4">
+          <div className="space-y-4">
             <Link href="/" className="flex flex-col items-start">
-              <span className="font-serif text-2xl font-bold tracking-wider text-mazelia-charcoal">
+              <span className="font-serif text-2xl font-bold tracking-wider text-[#302D29]">
                 MAZÉLIA
               </span>
-              <span className="text-[10px] uppercase tracking-widest text-mazelia-taupe -mt-1 font-medium">
+              <span className="text-[10px] uppercase tracking-[0.22em] text-[#9B9185] -mt-0.5 font-medium">
                 Events • Moments • Memories
               </span>
             </Link>
-            <p className="text-xs text-mazelia-taupe leading-relaxed">
-              Platform perencanaan acara digital elegan untuk masyarakat dan keluarga di Indonesia. Menjadikan setiap momen berharga lebih terstruktur, tenang, dan berkesan.
+            <p className="text-xs text-[#6E675F] leading-relaxed">
+              Platform dan agensi undangan digital elegan untuk pernikahan, pertunangan, dan berbagai momen istimewa keluarga di Indonesia. Praktis, personal, dan mudah dibagikan.
             </p>
           </div>
 
-          {/* Nav Links 1: Perencanaan */}
+          {/* Nav Links 1: Navigasi Website */}
           <div className="space-y-3">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-mazelia-bronze">Perencanaan Acara</h4>
-            <ul className="space-y-2 text-xs text-mazelia-charcoal-light">
-              <li><Link href="/register" className="hover:text-mazelia-gold transition-colors">Wedding Planner</Link></li>
-              <li><Link href="/register" className="hover:text-mazelia-gold transition-colors">Engagement Planner</Link></li>
-              <li><Link href="/register" className="hover:text-mazelia-gold transition-colors">Birthday & Milestone</Link></li>
-              <li><Link href="/register" className="hover:text-mazelia-gold transition-colors">Family Gathering</Link></li>
+            <h4 className="text-xs font-bold uppercase tracking-wider text-[#846B48]">
+              Navigasi
+            </h4>
+            <ul className="space-y-2.5 text-xs text-[#554F47]">
+              <li>
+                <Link href="/#beranda" className="hover:text-[#B69A72] transition-colors">
+                  Beranda
+                </Link>
+              </li>
+              <li>
+                <Link href="/#tentang" className="hover:text-[#B69A72] transition-colors">
+                  Tentang MAZÉLIA
+                </Link>
+              </li>
+              <li>
+                <Link href="/#cara-pesan" className="hover:text-[#B69A72] transition-colors">
+                  Cara Pemesanan
+                </Link>
+              </li>
+              <li>
+                <Link href="/pricing" className="hover:text-[#B69A72] transition-colors">
+                  Pilihan Paket
+                </Link>
+              </li>
+              <li>
+                <Link href="/fadhil-mazaya" className="hover:text-[#B69A72] transition-colors">
+                  Contoh Undangan Langsung
+                </Link>
+              </li>
             </ul>
           </div>
 
-          {/* Nav Links 2: Fitur Utama */}
+          {/* Nav Links 2: Koleksi Tema */}
           <div className="space-y-3">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-mazelia-bronze">Fitur Inti</h4>
-            <ul className="space-y-2 text-xs text-mazelia-charcoal-light">
-              <li><Link href="/fitur#checklist" className="hover:text-mazelia-gold transition-colors">Event Checklist & Timeline</Link></li>
-              <li><Link href="/fitur#budget" className="hover:text-mazelia-gold transition-colors">Budget Planner (IDR)</Link></li>
-              <li><Link href="/fitur#guest" className="hover:text-mazelia-gold transition-colors">Guest Management & RSVP</Link></li>
-              <li><Link href="/fitur#whatsapp" className="hover:text-mazelia-gold transition-colors">WhatsApp Invitation Generator</Link></li>
+            <h4 className="text-xs font-bold uppercase tracking-wider text-[#846B48]">
+              Koleksi Tema
+            </h4>
+            <ul className="space-y-2.5 text-xs text-[#554F47]">
+              {themes.map((t) => (
+                <li key={t.id}>
+                  <Link
+                    href={`/fadhil-mazaya?preview=true&previewTheme=${t.id}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-[#B69A72] transition-colors inline-flex items-center gap-2"
+                  >
+                    <span
+                      className="w-2 h-2 rounded-full border border-black/10 shrink-0"
+                      style={{ backgroundColor: t.swatch[0] }}
+                    />
+                    <span>{t.name}</span>
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Nav Links 3: Bantuan & Kebijakan */}
+          {/* Nav Links 3: Bantuan & Legal */}
           <div className="space-y-3">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-mazelia-bronze">Bantuan & Legal</h4>
-            <ul className="space-y-2 text-xs text-mazelia-charcoal-light">
-              <li><Link href="/tentang" className="hover:text-mazelia-gold transition-colors">Tentang Kami</Link></li>
-              <li><Link href="/pricing" className="hover:text-mazelia-gold transition-colors">Paket & Harga</Link></li>
-              <li><Link href="/kontak" className="hover:text-mazelia-gold transition-colors">Hubungi Dukungan</Link></li>
-              <li><span className="text-mazelia-taupe/80">Kepatuhan UU PDP No. 27/2022</span></li>
+            <h4 className="text-xs font-bold uppercase tracking-wider text-[#846B48]">
+              Bantuan &amp; Kebijakan
+            </h4>
+            <ul className="space-y-2.5 text-xs text-[#554F47]">
+              <li>
+                <Link href="/#faq" className="hover:text-[#B69A72] transition-colors">
+                  Pertanyaan Umum (FAQ)
+                </Link>
+              </li>
+              <li>
+                <Link href="/kontak" className="hover:text-[#B69A72] transition-colors">
+                  Hubungi Tim Pemesanan
+                </Link>
+              </li>
+              <li>
+                <Link href="/login" className="hover:text-[#B69A72] transition-colors">
+                  Masuk Akun Pengguna
+                </Link>
+              </li>
+              <li>
+                <span className="text-[#9B9185]">Privacy Policy (UU PDP No. 27/2022)</span>
+              </li>
+              <li>
+                <span className="text-[#9B9185]">Terms &amp; Conditions</span>
+              </li>
             </ul>
           </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-12 pt-8 border-t border-mazelia-border/60 flex flex-col sm:flex-row items-center justify-between text-xs text-mazelia-taupe">
-          <p>© {new Date().getFullYear()} MAZÉLIA. Hak Cipta Dilindungi Undang-Undang.</p>
-          <p className="mt-2 sm:mt-0 font-serif italic text-mazelia-gold-dark">
-            Dirancang dengan keanggunan untuk momen-momen paling sakral dalam hidup Anda.
+        <div className="mt-12 pt-8 border-t border-[#E8DFD0]/80 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-[#9B9185]">
+          <p>© {new Date().getFullYear()} MAZÉLIA Agency. Hak Cipta Dilindungi Undang-Undang.</p>
+          <p className="font-serif italic text-[#846B48]">
+            Dirancang dengan keanggunan untuk momen-momen paling berharga dalam hidup Anda.
           </p>
         </div>
       </div>

@@ -1,47 +1,54 @@
-import { createClient } from '@/lib/supabase/server';
-import { InvitationClient } from '@/components/modules/invitation/InvitationClient';
-import { DEFAULT_INVITATION } from '@/lib/constants/default-invitation';
 import type { Metadata } from 'next';
+import Link from 'next/link';
+import { Navbar } from '@/components/layout/Navbar';
+import { Footer } from '@/components/layout/Footer';
+import { HomeHeroAndTrust } from '@/components/modules/home/HomeHeroAndTrust';
+import { HomeThemesAndShowcase } from '@/components/modules/home/HomeThemesAndShowcase';
+import { HomeOrderFeaturesPricing } from '@/components/modules/home/HomeOrderFeaturesPricing';
+import { Sparkles } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'The Wedding of Sarah & Brian — MAZÉLIA Undangan Digital',
-  description: 'Undangan Pernikahan Eksklusif Sarah & Brian. Events • Moments • Memories.',
+  title: 'MAZÉLIA — Undangan Digital Premium | Events • Moments • Memories',
+  description:
+    'Platform dan agensi undangan digital elegan untuk pernikahan, pertunangan, dan acara keluarga di Indonesia. Pilih desain favoritmu, sesuaikan detail acara, dan bagikan dengan mudah.',
   openGraph: {
-    title: 'The Wedding of Sarah & Brian — MAZÉLIA',
-    description: 'Undangan Pernikahan Eksklusif Sarah & Brian. Events • Moments • Memories.',
-    images: ['https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80'],
+    title: 'MAZÉLIA — Undangan Digital Premium',
+    description:
+      'Setiap Momen Istimewa, Layak Diabadikan dengan Cara yang Istimewa. Events • Moments • Memories.',
+    locale: 'id_ID',
+    type: 'website',
   },
 };
 
-interface HomePageProps {
-  searchParams?: Promise<{ to?: string }>;
-}
-
-export default async function HomePage({ searchParams }: HomePageProps) {
-  const resolvedParams = searchParams ? await searchParams : undefined;
-  const guestName = resolvedParams?.to;
-  const supabase = await createClient();
-
-  // Ambil undangan utama (default: sarah-brian)
-  const { data: invitation } = await supabase
-    .from('invitations')
-    .select('*')
-    .eq('slug', 'sarah-brian')
-    .single();
-
-  const activeInvitation = invitation || DEFAULT_INVITATION;
-
-  const { data: wishes } = await supabase
-    .from('invitation_wishes')
-    .select('*')
-    .eq('invitation_id', activeInvitation.id)
-    .order('created_at', { ascending: false });
-
+export default function HomePage() {
   return (
-    <InvitationClient
-      invitation={activeInvitation}
-      wishes={wishes || []}
-      guestName={guestName}
-    />
+    <div className="min-h-screen flex flex-col bg-[#FAF8F4] text-[#302D29] pb-16 lg:pb-0">
+      <Navbar />
+
+      <main className="flex-1">
+        <HomeHeroAndTrust />
+        <HomeThemesAndShowcase />
+        <HomeOrderFeaturesPricing />
+      </main>
+
+      <Footer />
+
+      {/* Mobile Sticky Bottom Conversion Bar */}
+      <div className="fixed bottom-0 inset-x-0 z-30 lg:hidden bg-[#FAF8F4]/95 backdrop-blur-md border-t border-[#E8DFD0] px-4 py-2.5 flex items-center justify-between gap-3 shadow-[0_-4px_20px_rgba(0,0,0,0.06)]">
+        <a
+          href="#tema"
+          className="flex-1 py-2.5 rounded-full border border-[#E8DFD0] bg-white text-center text-xs font-semibold text-[#302D29]"
+        >
+          Lihat Tema
+        </a>
+        <Link
+          href="/kontak"
+          className="flex-1 py-2.5 rounded-full bg-[#B69A72] text-white text-center text-xs font-semibold inline-flex items-center justify-center gap-1.5 shadow-sm"
+        >
+          <Sparkles className="w-3.5 h-3.5" />
+          <span>Pesan Undangan</span>
+        </Link>
+      </div>
+    </div>
   );
 }
