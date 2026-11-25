@@ -12,7 +12,7 @@ export default async function AdminEditPage() {
   const { data: { user } } = await supabase.auth.getUser();
 
   if (!user) {
-    redirect('/studio-mazelia/portal-masuk?redirect=/studio-mazelia/ruang-agensi/edit');
+    redirect('/studio-mazelia/portal-masuk');
   }
 
   // Fetch latest invitation

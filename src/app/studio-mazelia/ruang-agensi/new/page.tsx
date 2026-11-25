@@ -11,7 +11,7 @@ export default async function AdminNewInvitationPage() {
   const { data: { user } } = await supabase.auth.getUser();
 
   if (!user) {
-    redirect('/studio-mazelia/portal-masuk?redirect=/studio-mazelia/ruang-agensi/new');
+    redirect('/studio-mazelia/portal-masuk');
   }
 
   return (

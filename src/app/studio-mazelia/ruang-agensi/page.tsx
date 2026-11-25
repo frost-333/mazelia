@@ -24,7 +24,7 @@ export default async function AdminDashboardPage() {
   const { data: { user } } = await supabase.auth.getUser();
 
   if (!user) {
-    redirect('/studio-mazelia/portal-masuk?redirect=/studio-mazelia/ruang-agensi');
+    redirect('/studio-mazelia/portal-masuk');
   }
 
   // Fetch all invitations created by user

@@ -64,7 +64,6 @@ export async function updateSession(request: NextRequest) {
   if (!user && isInternalProtected) {
     const url = request.nextUrl.clone();
     url.pathname = '/studio-mazelia/portal-masuk';
-    url.searchParams.set('redirect', pathname);
     return NextResponse.redirect(url);
   }
 
